@@ -1,0 +1,121 @@
+[gd_scene load_steps=11 format=3 uid="uid://c5mtr4vuvlq6k"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_2fyqm"]
+[ext_resource type="Texture2D" uid="uid://dpb5gx4pnmpyq" path="res://Sprites/player.png" id="2_4eqnb"]
+[ext_resource type="Script" path="res://Scripts/pan_camera.gd" id="3_8kjcc"]
+[ext_resource type="Texture2D" uid="uid://b63wrvhlhda3k" path="res://Sprites/cave_background.png" id="4_qtdng"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhw3f"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_xbdfg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_h8st7"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_cilye"]
+resource_name = "jump"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_t6ctj"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_68gny"]
+_data = {
+"RESET": SubResource("Animation_xbdfg"),
+"idle": SubResource("Animation_h8st7"),
+"jump": SubResource("Animation_cilye"),
+"run": SubResource("Animation_t6ctj")
+}
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(163, 35)
+script = ExtResource("1_2fyqm")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_8kjcc")
+
+[node name="CaveBackground" type="Sprite2D" parent="Camera2D"]
+show_behind_parent = true
+z_index = -1
+texture = ExtResource("4_qtdng")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4eqnb")
+hframes = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fhw3f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_68gny")
+}
+
+[node name="ParticleRun" type="CPUParticles2D" parent="."]
+position = Vector2(-2, 7)
+rotation = 3.65342
+emitting = false
+gravity = Vector2(0, 0)
+initial_velocity_min = 36.0
+initial_velocity_max = 36.0
+
+[node name="ParticleFall" type="CPUParticles2D" parent="."]
+position = Vector2(0, 8)
+rotation = 4.87481
+explosiveness = 1.0
+spread = 138.18
+gravity = Vector2(0, 60)
+initial_velocity_min = 30.0
+initial_velocity_max = 100.0

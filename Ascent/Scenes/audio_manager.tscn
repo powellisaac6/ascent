@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2ix2agc0700x"]
+
+[ext_resource type="Script" path="res://Scripts/audio_manager.gd" id="1_st18y"]
+[ext_resource type="AudioStream" uid="uid://c0tco2molb4cr" path="res://Audio/Winds_Theme_Vibes_ring.mp3" id="2_jtk6x"]
+[ext_resource type="AudioStream" uid="uid://bpjy11jtrht7w" path="res://Audio/fast-simple-chop-5-6270.mp3" id="3_n5iux"]
+[ext_resource type="AudioStream" uid="uid://bo6khn3e1gi8t" path="res://Audio/fallingsound.wav" id="4_y6sny"]
+[ext_resource type="AudioStream" uid="uid://cnf44hwn2gxty" path="res://Audio/501102__evretro__8-bit-footsteps.wav" id="5_15yyb"]
+[ext_resource type="AudioStream" uid="uid://4odpjywy8h5p" path="res://Audio/wind.wav" id="6_2kl3m"]
+[ext_resource type="AudioStream" uid="uid://dyvv7cwu1d202" path="res://Audio/failure-drum-sound-effect-1-46093.mp3" id="7_yy6pe"]
+[ext_resource type="AudioStream" uid="uid://eqt7a57hp10w" path="res://Audio/Winds_Theme_Strings_1.mp3" id="8_4ncol"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_st18y")
+
+[node name="Track1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_jtk6x")
+volume_db = 5.0
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_n5iux")
+volume_db = -10.0
+
+[node name="Land" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_y6sny")
+volume_db = -30.0
+
+[node name="Run" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_15yyb")
+volume_db = -20.0
+
+[node name="Wind" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_2kl3m")
+volume_db = 5.0
+
+[node name="GameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_yy6pe")
+volume_db = -15.0
+
+[node name="Menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_4ncol")
+volume_db = -15.0
